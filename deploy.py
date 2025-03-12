@@ -1,24 +1,24 @@
-from flask import Flask, render_template, request
+import streamlit as st
 import pickle
 
-app = Flask(__name__)
-# load the model
+# Load the model
 model = pickle.load(open('savedmodel.sav', 'rb'))
 
-@app.route('/')
-def home():
-    result = ''
-    return render_template('index.html', **locals())
+# Set the title of the app
+st.title('Iris Species Prediction')
 
+# Create input fields for user data
+sepal_length = st.number_input('Sepal Length', min_value=0.0, max_value=10.0, step=0.1)
+sepal_width = st.number_input('Sepal Width', min_value=0.0, max_value=10.0, step=0.1)
+petal_length = st.number_input('Petal Length', min_value=0.0, max_value=10.0, step=0.1)
+petal_width = st.number_input('Petal Width', min_value=0.0, max_value=10.0, step=0.1)
 
-@app.route('/predict', methods=['POST', 'GET'])
-def predict():
-    sepal_length = float(request.form['sepal_length'])
-    sepal_width = float(request.form['sepal_width'])
-    petal_length = float(request.form['petal_length'])
-    petal_width = float(request.form['petal_width'])
+# Initialize the result variable
+result = ''
+
+# Create a button for prediction
+if st.button('Predict'):
+    # Make a prediction
     result = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])[0]
-    return render_template('index.html', **locals())
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Display the result
+    st.success(f'The predicted species is: {result}')
