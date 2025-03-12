@@ -8,10 +8,10 @@ model = pickle.load(open('savedmodel.sav', 'rb'))
 st.title('Iris Species Prediction')
 
 # Create input fields for user data
-sepal_length = st.number_input('Sepal Length', min_value=0.1, max_value=10.0, step=0.1)
-sepal_width = st.number_input('Sepal Width', min_value=0.1, max_value=10.0, step=0.1)
-petal_length = st.number_input('Petal Length', min_value=0.1, max_value=10.0, step=0.1)
-petal_width = st.number_input('Petal Width', min_value=0.1, max_value=10.0, step=0.1)
+sepal_length = st.number_input('Sepal Length', min_value=0.1, max_value=10.0)
+sepal_width = st.number_input('Sepal Width', min_value=0.1, max_value=10.0)
+petal_length = st.number_input('Petal Length', min_value=0.1, max_value=10.0)
+petal_width = st.number_input('Petal Width', min_value=0.1, max_value=10.0)
 
 # Initialize the result variable
 result = ''
